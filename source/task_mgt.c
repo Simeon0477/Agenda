@@ -37,15 +37,10 @@ void deleteTask(Task task[], int *count, int index) {
 }
 
 //Edition d'une tâche d'une tâche
-void setTask (Day* jour, int h, int m, const char* desc) {
-    if (jour->taskCount < MAX_TASKS) {
-        Task* t = &jour->tasks[jour->taskCount++];
-        t->hour = h;
-        t->min = m;
-        strncpy(t->desc, desc, 100);
-    }else{
-        printf("Plus tard");
-    }
+void editTask (Task* t, int h, int m, const char* desc) {
+    t->hour = h;
+    t->min = m;
+    strncpy(t->desc, desc, 100);
 }
 
 //Sauvegarde des données
