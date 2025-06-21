@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+#include "header/task_mgt.h"
+
+Day  agenda[7] = {
+    {"Lundi", {}, 0},
+    {"Mardi", {}, 0},
+    {"Mercredi", {}, 0},
+    {"Jeudi", {}, 0},
+    {"Vendredi", {}, 0},
+    {"Samedi", {}, 0},
+    {"Dimanche", {}, 0}
+};
+
+int choice;
+char day[10];
+int hour, min = 0;
+char desc[100];
+
+int main(){
+    loadAgenda(agenda, 7);
+    printf("\033[35m******** AGENDA HEBDOMADAIRE ******** \n\n\033[0m");
+    printf("Que voulez vous faire ? \n");
+    printf(" 1 - Ajouter une tâche \n");
+    printf(" 2 - Afficher les tâches d'aujourd'hui \n");
+    printf(" 3 - Suppression d'une tâche\n");
+    printf(" 4 - Suppression de toutes les tâches d'un jour\n");
+    printf(" 5 - Edition d'une tâche\n");
+    printf(" 6 - Recherche d'une tâche d'une tâche\n");
+
+    printf("\nVotre choix -> ");
+    scanf("%d", &choice);
+
+    switch(choice){
+        case 1 :{
+            //Saisie des données
+            printf("\nEntrez le jour (Première lettre en majuscule) :\n");
+            scanf("%s", day);
+            printf("Entrez l'heure de début de la tâche :\n");
+            scanf("%d", &hour);
+            printf("Entrez les minutes pour plus de précision :\n");
+            scanf("%d", &min);
+            printf("Entrez la description de la tâche :\n");
+            scanf(" %[^\n]", desc);
+
+            //Recherche du jour
+            for(int i=0; i < 7; i++){
+                if (strcmp(day, agenda[i].name) == 0) {
+                    //Ajout
+                    addTask (&agenda[i], hour, min, desc);
+                    saveAgenda(agenda, 7);
+                }
+            }
+            break;
+        }
+        case 2 :{
+            //Saisie des données
+            printf("\nEntrez le jour (Première lettre en majuscule) :\n");
+            scanf("%s", day);
+
+            //Recherche du jour
+            for(int i = 0; i < 7; i++){
+                if (strcmp(day, agenda[i].name) == 0) {
+                    //Affichage
+                    showTask (&agenda[i]);
+                }
+            }
+            break;
+        }
+        case 2 :{
+            //Saisie des données
+            printf("\nEntrez le jour (Première lettre en majuscule) :\n");
+            scanf("%s", day);
+            printf("Entrez le nom de la tâche à supprimer de la tâche :\n");
+            scanf(" %[^\n]", desc);
+
+            //Recherche du jour
+            for(int i = 0; i < 7; i++){
+                if (strcmp(day, agenda[i].name) == 0) {
+                    //Affichage
+                    showTask (&agenda[i]);
+                }
+            }
+            break;
+        }
+        
+        default :{
+            printf(" \nChoix invalide\n\n");
+        }
+    }
+
+    return 0;
+}
+
