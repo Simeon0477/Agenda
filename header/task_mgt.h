@@ -28,6 +28,7 @@ typedef struct{
 
 void addTask (Day* jour, int h, int m, const char* desc);
 void showTask(Day* jour);
+void deleteTask(Task task[], int *count, int index);
 void saveAgenda(Day agenda[], int size);
 void loadAgenda(Day agenda[], int size);
 

@@ -25,6 +25,30 @@ void showTask(Day* jour) {
     }
 }
 
+//Suppression d'une tâche
+void deleteTask(Task task[], int *count, int index) {
+    // Décaler les éléments vers la gauche
+    for (int i = index; i < *count - 1; i++) {
+        task[i] = task[i + 1];
+    }
+
+    // Réduire la taille du tableau
+    (*count)--; 
+}
+
+//Edition d'une tâche d'une tâche
+void setTask (Day* jour, int h, int m, const char* desc) {
+    if (jour->taskCount < MAX_TASKS) {
+        Task* t = &jour->tasks[jour->taskCount++];
+        t->hour = h;
+        t->min = m;
+        strncpy(t->desc, desc, 100);
+    }else{
+        printf("Plus tard");
+    }
+}
+
+//Sauvegarde des données
 void saveAgenda(Day agenda[], int size) {
     FILE *file = fopen("agenda.txt", "w");
     if (file == NULL) {
@@ -42,6 +66,7 @@ void saveAgenda(Day agenda[], int size) {
     fclose(file);
 }
 
+//Chargement des données
 void loadAgenda(Day agenda[], int size) {
     FILE *file = fopen("agenda.txt", "r");
     if (file == NULL) {

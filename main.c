@@ -27,9 +27,8 @@ int main(){
     printf(" 1 - Ajouter une tâche \n");
     printf(" 2 - Afficher les tâches d'aujourd'hui \n");
     printf(" 3 - Suppression d'une tâche\n");
-    printf(" 4 - Suppression de toutes les tâches d'un jour\n");
-    printf(" 5 - Edition d'une tâche\n");
-    printf(" 6 - Recherche d'une tâche d'une tâche\n");
+    printf(" 4 - Edition d'une tâche\n");
+    printf(" 5 - Recherche d'une tâche d'une tâche\n");
 
     printf("\nVotre choix -> ");
     scanf("%d", &choice);
@@ -70,7 +69,7 @@ int main(){
             }
             break;
         }
-        case 2 :{
+        case 3 :{
             //Saisie des données
             printf("\nEntrez le jour (Première lettre en majuscule) :\n");
             scanf("%s", day);
@@ -80,8 +79,12 @@ int main(){
             //Recherche du jour
             for(int i = 0; i < 7; i++){
                 if (strcmp(day, agenda[i].name) == 0) {
-                    //Affichage
-                    showTask (&agenda[i]);
+                    for(int j = 0; j < agenda[i].taskCount; j++){
+                        if (strcmp(desc, agenda[i].tasks[j].desc) == 0){
+                            deleteTask (agenda[i].tasks, &agenda[i].taskCount, j);
+                            saveAgenda(agenda, 7);
+                        }
+                    }
                 }
             }
             break;
