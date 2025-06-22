@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #include "header/task_mgt.h"
 
@@ -80,7 +79,7 @@ int main(){
             printf("Entrez le nom de la tâche à supprimer de la tâche :\n");
             scanf(" %[^\n]", desc);
 
-            //Recherche du jour
+            //Recherche de la tâche
             for(int i = 0; i < 7; i++){
                 if (strcmp(day, agenda[i].name) == 0) {
                     for(int j = 0; j < agenda[i].taskCount; j++){
@@ -107,7 +106,7 @@ int main(){
             printf("Entrez les minutes :\n");
             scanf("%d", &min);
 
-            //Recherche du jour
+            //Recherche de la tâche
             for(int i = 0; i < 7; i++){
                 if (strcmp(day, agenda[i].name) == 0) {
                     for(int j = 0; j < agenda[i].taskCount; j++){
@@ -115,6 +114,27 @@ int main(){
                             editTask (agenda[i].tasks, hour, min, ndesc);
                             saveAgenda(agenda, 7);
                         }
+                    }
+                }
+            }
+            break;
+        }
+        case 5 :{
+            printf("\n\033[32m3 - Recherche d'une tâche\n\033[0m");
+            //Saisie des données
+            printf("Entrez le nom de la tâche recherchée :\n");
+            scanf(" %[^\n]", desc);
+
+            //Recherche de la tâche
+            printf("Résultats de la recherche :\n");
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < agenda[i].taskCount; j++){
+                    if (strcmp(desc, agenda[i].tasks[j].desc) == 0){
+                        printf("-----------------------\n");
+                        printf("Nom : %s \n", agenda[i].tasks[j].desc);
+                        printf("Jour : %s \n", agenda[i].name);
+                        printf("Heure de début :  - %02d h %02d min \n", agenda[i].tasks[j].hour, agenda[i].tasks[j].min);
+                        printf("-----------------------\n");
                     }
                 }
             }

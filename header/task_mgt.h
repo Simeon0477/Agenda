@@ -1,18 +1,7 @@
 #ifndef __TASK_MGT_H__
 #define __TASK_MGT_H__
 
-#define MAX_TASKS 10
-
-/*struct time {
-    int tm_sec;
-    int tm_min;
-    int tm_hour;
-    int tm_mday
-    int tm_mon;
-    int year;
-    int tm_wday
-    int tm_yday
-}*/
+#define MAX_TASKS 48
 
 typedef struct{
     int hour;
